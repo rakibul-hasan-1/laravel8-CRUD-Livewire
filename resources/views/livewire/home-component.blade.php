@@ -3,6 +3,9 @@
         <div class="row">
             <h1>Basic CRUD Operation</h1>
             <div class="col-md-12">
+                @if (Session::has('delete_message'))
+                    <div class="alert  alert-success">{{Session::get('delete_message')}}</div>
+                @endif
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="row">
@@ -28,18 +31,20 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($students as $student)
                                 <tr>
-                                    <td>1</td>
-                                    <td>Rakibul</td>
-                                    <td>Hasan</td>
-                                    <td>rakibulhasan@gmail.com</td>
-                                    <td>01756255989</td>
-                                    <td>Adabor-10, Mohammadpur, Dhaka, bangladesh</td>
+                                    <td>{{$student->id}}</td>
+                                    <td>{{$student->fname}}</td>
+                                    <td>{{$student->lname}}</td>
+                                    <td>{{$student->email}}</td>
+                                    <td>{{$student->phone}}</td>
+                                    <td>{{$student->address}}</td>
                                     <td>
-                                        <a href="{{route('edit.home')}}" class="btn btn-primary">Edit</a>
-                                        <a href="#" class="btn btn-danger">Delete</a>
+                                        <a href="{{route('edit.home',['student_id'=>$student->id])}}" class="btn btn-primary">Edit</a>
+                                        <a href="#" class="btn btn-danger" onclick="confirm('Are you sure, You want to delete this student ?') || event.stopImmediatePropagation()" wire:click.prevent="deleteStudent({{$student->id}})">Delete</a>
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

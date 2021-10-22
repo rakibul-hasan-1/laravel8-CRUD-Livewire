@@ -22,4 +22,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',HomeComponent::class);
 Route::get('/add',AddHomeComponent::class)->name('add.home');
-Route::get('/edit',EditHomeComponent::class)->name('edit.home');
+Route::get('/edit/{student_id}',EditHomeComponent::class)->name('edit.home');

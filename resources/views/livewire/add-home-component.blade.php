@@ -15,35 +15,53 @@
                         </div>
                     </div>
                     <div class="panel-body">
-                        <form action="" class="form-horizontal">
+                        @if (Session::has('message'))
+                            <div class="alert alert-success">{{Session::get('message')}}</div>
+                        @endif
+                        <form action="" class="form-horizontal" wire:submit.prevent="addStudent">
                             <div class="form-group">
                                 <label for="" class="col-md-4 control-label">First Name:</label>
                                 <div class="col-md-4">
-                                    <input type="text" class="form-control input-md" placeholder="First Name"/>
+                                    <input type="text" class="form-control input-md" placeholder="First Name" wire:model="fname"/>
+                                    @error('fname')
+                                        <p class="text-danger" role="text">{{$message}}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="" class="col-md-4 control-label">Last Name:</label>
                                 <div class="col-md-4">
-                                    <input type="text" class="form-control input-md" placeholder="Last Name"/>
+                                    <input type="text" class="form-control input-md" placeholder="Last Name" wire:model="lname"/>
+                                    @error('lname')
+                                        <p class="text-danger" role="text">{{$message}}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="" class="col-md-4 control-label">Email:</label>
                                 <div class="col-md-4">
-                                    <input type="text" class="form-control input-md" placeholder="Email"/>
+                                    <input type="email" class="form-control input-md" placeholder="Email" wire:model="email"/>
+                                    @error('email')
+                                        <p class="text-danger" role="text">{{$message}}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="" class="col-md-4 control-label">Phone:</label>
                                 <div class="col-md-4">
-                                    <input type="text" class="form-control input-md" placeholder="Phone"/>
+                                    <input type="text" class="form-control input-md" placeholder="Phone" wire:model="phone"/>
+                                    @error('phone')
+                                        <p class="text-danger" role="text">{{$message}}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="" class="col-md-4 control-label">Address:</label>
                                 <div class="col-md-4">
-                                    <input type="text" class="form-control input-md" placeholder="Address"/>
+                                    <input type="text" class="form-control input-md" placeholder="Address" wire:model="address"/>
+                                    @error('address')
+                                        <p class="text-danger" role="text">{{$message}}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group">

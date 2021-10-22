@@ -2,12 +2,19 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Student;
 use Livewire\Component;
 
 class HomeComponent extends Component
 {
+    public function deleteStudent($id){
+        $student=Student::find($id);
+        $student->delete();
+        session()->flash('delete_message','Student Deleted Successfully!');
+    }
     public function render()
     {
-        return view('livewire.home-component')->layout('layouts.base');
+        $students=Student::all();
+        return view('livewire.home-component',['students'=>$students])->layout('layouts.base');
     }
 }
