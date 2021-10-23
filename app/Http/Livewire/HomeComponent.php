@@ -9,6 +9,9 @@ class HomeComponent extends Component
 {
     public function deleteStudent($id){
         $student=Student::find($id);
+        if($student->image){
+            unlink('images/students'.'/'.$student->image);
+        }
         $student->delete();
         session()->flash('delete_message','Student Deleted Successfully!');
     }

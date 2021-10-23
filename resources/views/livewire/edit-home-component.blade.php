@@ -65,6 +65,17 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label for="" class="col-md-4 control-label">Image:</label>
+                                <div class="col-md-4">
+                                    <input type="file" class="form-control input-file" wire:model="newimage">
+                                    @if ($newimage)
+                                        <img src="{{$newimage->temporaryUrl()}}" alt="img" width="120">
+                                    @else
+                                        <img src="{{asset('images/students'.'/'.$image)}}" alt="" width="120">
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label for="" class="col-md-4 control-label"></label>
                                 <div class="col-md-4">
                                     <button class="btn btn-primary">Update</button>
