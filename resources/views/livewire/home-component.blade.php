@@ -28,6 +28,7 @@
                                     <th>Phone</th>
                                     <th>Address</th>
                                     <th>Image</th>
+                                    <th>Image Galary</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -41,6 +42,16 @@
                                     <td>{{$student->phone}}</td>
                                     <td>{{$student->address}}</td>
                                     <td><img src="{{asset('images/students')}}/{{$student->image}}" width="80"/></td>
+                                    <td>
+                                        @if ($student->images)
+                                            @php
+                                                $images=explode(',',$student->images)
+                                            @endphp
+                                            @foreach ($images as $image)
+                                                <img src="{{asset('images/students')}}/{{$image}}" alt="" width="60"/>
+                                            @endforeach
+                                        @endif
+                                    </td>
                                     <td>
                                         <a href="{{route('edit.home',['student_id'=>$student->id])}}" class="btn btn-primary">Edit</a>
                                         <a href="#" class="btn btn-danger" onclick="confirm('Are you sure, You want to delete this student ?') || event.stopImmediatePropagation()" wire:click.prevent="deleteStudent({{$student->id}})">Delete</a>

@@ -10,7 +10,7 @@ use Livewire\WithFileUploads;
 class AddHomeComponent extends Component
 {
     use WithFileUploads;
-    public $fname,$lname,$email,$phone,$address,$image;
+    public $fname,$lname,$email,$phone,$address,$image,$images;
 
     public function updated($fields){
         $this->validateOnly($fields,[
@@ -41,6 +41,16 @@ class AddHomeComponent extends Component
         $imageName=Carbon::now()->timestamp.'.'.$this->image->extension();
         $this->image->storeAs('students',$imageName);
         $student->image=$imageName;
+
+        if($this->images){
+            $imagesname="";
+            foreach($this->images as $key=>$images){
+                $imgsName=Carbon::now()->timestamp.$key.'.'.$images->extension();
+                $images->storeAs('students',$imgsName);
+                $imagesname=$imagesname.','.$imgsName;
+            }
+            $student->images=$imagesname;
+        }
         $student->save();
         session()->flash('message','Student has been saved successfully!');
     }

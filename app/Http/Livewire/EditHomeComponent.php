@@ -10,7 +10,7 @@ use Livewire\WithFileUploads;
 class EditHomeComponent extends Component
 {
     use WithFileUploads;
-    public $student_id,$fname,$lname,$email,$phone,$address,$newimage,$image;
+    public $student_id,$fname,$lname,$email,$phone,$address,$newimage,$image,$images,$newimages;
 
     public function mount($student_id){
         $this->student_id=$student_id;
@@ -21,6 +21,7 @@ class EditHomeComponent extends Component
         $this->phone=$student->phone;
         $this->address=$student->address;
         $this->image=$student->image;
+        $this->images=$student->images;
     }
     public function updated($fields){
         $this->validateOnly($fields,[
@@ -51,6 +52,23 @@ class EditHomeComponent extends Component
             $imageName=Carbon::now()->timestamp.'.'.$this->newimage->extension();
             $this->newimage->storeAs('students',$imageName);
             $student->image=$imageName;
+        }
+        if($this->newimages){
+            if($this->images){
+                $images=explode(',',$this->images);
+                foreach($images as $image){
+                    if($image){
+                        unlink('images/students'.'/'.$image);
+                    }
+                }
+            }
+            $imagesname="";
+            foreach($this->newimages as $key=>$images){
+                $imgsName=Carbon::now()->timestamp.$key.'.'.$images->extension();
+                $images->storeAs('students',$imgsName);
+                $imagesname=$imagesname.','.$imgsName;
+            }
+            $student->images=$imagesname;
         }
         $student->save();
         session()->flash('message','Student has been saved successfully!');

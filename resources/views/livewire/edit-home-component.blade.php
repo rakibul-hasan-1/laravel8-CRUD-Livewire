@@ -76,6 +76,26 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label for="" class="col-md-4 control-label">Image Galary:</label>
+                                <div class="col-md-4">
+                                    <input type="file" class="form-control input-file" wire:model="newimages" multiple>
+                                    @if ($newimages)
+                                        @foreach ($newimages as $newimage)
+                                            <img src="{{$newimage->temporaryUrl()}}" alt="" width="120">
+                                        @endforeach
+                                    @else
+                                        @if ($images)
+                                            @php
+                                                $images=explode(',',$images);
+                                            @endphp
+                                            @foreach ($images as $image)
+                                                <img src="{{asset('images/students')}}/{{$image}}" alt="" width="120">
+                                            @endforeach
+                                        @endif
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label for="" class="col-md-4 control-label"></label>
                                 <div class="col-md-4">
                                     <button class="btn btn-primary">Update</button>

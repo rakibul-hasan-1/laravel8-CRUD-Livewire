@@ -12,6 +12,14 @@ class HomeComponent extends Component
         if($student->image){
             unlink('images/students'.'/'.$student->image);
         }
+        if($student->images){
+            $images=explode(',',$student->images);
+            foreach($images as $image){
+                if($image){
+                unlink('images/students'.'/'.$image);
+                }
+            }
+        }
         $student->delete();
         session()->flash('delete_message','Student Deleted Successfully!');
     }

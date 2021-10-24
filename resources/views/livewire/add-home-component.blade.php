@@ -77,6 +77,20 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label for="" class="col-md-4 control-label">Image Galary:</label>
+                                <div class="col-md-4">
+                                    <input type="file" class="form-control input-file" wire:model="images" multiple>
+                                    @if ($images)
+                                        @foreach ($images as $image)
+                                            <img src="{{$image->temporaryUrl()}}" alt="" width="120">
+                                        @endforeach
+                                    @endif
+                                    @error('images')
+                                        <p class="alert alert-danger" role="text">{{$message}}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label for="" class="col-md-4 control-label"></label>
                                 <div class="col-md-4">
                                     <button class="btn btn-primary">Submit</button>
